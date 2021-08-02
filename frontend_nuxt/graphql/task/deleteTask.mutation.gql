@@ -1,0 +1,6 @@
+#import "./task.fragment.gql"
+mutation($input: DeleteTaskInput!) {
+ deleteTask(input: $input) {
+     ...TaskFragment
+ }
+}

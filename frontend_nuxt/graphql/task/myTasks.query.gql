@@ -1,0 +1,6 @@
+#import "./task.fragment.gql"
+{
+  myTasks{
+      ...TaskFragment
+ }
+}

@@ -1,0 +1,6 @@
+#import "./user.fragment.gql"
+{
+  me {
+    ...UserFragment 
+  }
+}

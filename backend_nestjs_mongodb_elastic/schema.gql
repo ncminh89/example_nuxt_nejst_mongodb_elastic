@@ -1,0 +1,125 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}
+
+type UserSubPayload {
+  user: User!
+  mutation: String!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+type Task {
+  id: ID!
+  text: String!
+  order: Float
+  done: Boolean!
+  created_by_id: String!
+  created_by: User!
+  created_at: String!
+  updated_at: String!
+}
+
+type TaskSubPayload {
+  task: Task!
+  mutation: String!
+}
+
+type Query {
+  users: [User!]!
+  searchUsers(input: SearchUsersInput!): [User!]!
+  userById(id: String!): User!
+  me: User!
+  tasks: [Task!]!
+  searchTasks(input: SearchTaskInput!): [Task!]!
+  taskById(id: String!): Task!
+  myTasks: [Task!]!
+}
+
+input SearchUsersInput {
+  text: String!
+}
+
+input SearchTaskInput {
+  text: String!
+}
+
+type Mutation {
+  login(input: LoginInput!): AuthPayload!
+  createUser(input: CreateUserInput!): AuthPayload!
+  updateUser(input: UpdateUserInput!): User!
+  deleteUser(input: DeleteUserInput!): User!
+  recreateUserELS: Boolean!
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(input: UpdateTaskInput!): Task!
+  deleteTask(input: DeleteTaskInput!): Task!
+  recreateTaskELS: Boolean!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  userId: String!
+  name: String
+  username: String
+  email: String
+  password: String
+  branchId: String
+  role: RoleEnum
+  avatar: String
+  isDisable: Boolean
+  isDeleted: Boolean
+}
+
+enum RoleEnum {
+  OWNER
+  MANAGER
+  EMPLOYEE
+  RECEPTIONIST
+  SUPER_ADMIN
+  MODERATOR
+}
+
+input DeleteUserInput {
+  userId: String!
+}
+
+input CreateTaskInput {
+  text: String!
+  order: Float!
+}
+
+input UpdateTaskInput {
+  task_id: String!
+  text: String
+  order: Float
+  done: Boolean
+}
+
+input DeleteTaskInput {
+  task_id: String!
+}
+
+type Subscription {
+  userMutationSub: UserSubPayload
+  taskMutationSub: TaskSubPayload
+}
