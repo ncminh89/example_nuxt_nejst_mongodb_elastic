@@ -3,7 +3,6 @@
 This is an example of simple application for daily task management, build by Nuxtjs, Nestjs and mongodb
 
 ## Install App
----
 Nodejs, docker and docker-compose must be installed in your computer
 
 Install all package in both frontend and backend
@@ -26,7 +25,6 @@ npm install
 ```
 
 ## Run App
----
 ```sh
 # Run database
 cd ./backend_nestjs_mongodb_elastic/mongo-local
@@ -42,7 +40,6 @@ npm run dev
 ```
 
 ## App Structure 
----
 1. Frontend `Nuxtjs`
 
 2. Backend `Nestjs with GraphqlAPI`
