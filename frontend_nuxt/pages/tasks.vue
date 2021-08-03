@@ -53,7 +53,7 @@
             <v-btn
               small
               icon
-              class="warning  mr-2"
+              class="warning mr-2"
               v-if="newTaskText"
               @click="clearText()"
               ><v-icon small color="white mr-1">mdi-close</v-icon></v-btn
@@ -110,12 +110,14 @@ export default {
       } else if (newIndex == myTasks.length - 1) {
         newOrder = myTasks[myTasks.length - 2].order + 2;
       } else {
-        newOrder = (myTasks[newIndex - 1].order + myTasks[newIndex].order) / 2;
+        newOrder = (myTasks[newIndex - 1].order + myTasks[newIndex+1].order) / 2;
       }
       console.log(newOrder);
       element.order = newOrder;
+      this.updateTasksCache(myTasks);
       this.updateOrder(element, newOrder);
     },
+
     updateOrder(task, newOrder) {
       this.$store.dispatch("task/updateTask", {
         input: {
@@ -124,6 +126,15 @@ export default {
         },
       });
     },
+
+    updateTasksCache(newList) {
+      console.log(this.$apolloProvider.defaultClient.cache);
+      var cache = this.$apolloProvider.defaultClient.cache;
+      var data = cache.readQuery({ query: myTasks });
+      data.myTasks = newList;
+      cache.writeQuery({ query: myTasks, data });
+    },
+
     createTask() {
       console.log("create task");
       this.$store
@@ -140,9 +151,11 @@ export default {
           this.clearText();
         });
     },
+
     clearText() {
       this.newTaskText = "";
     },
+
     deleteTask(task) {
       console.log("delete task", task);
       this.$store.dispatch("task/deleteTask", {
